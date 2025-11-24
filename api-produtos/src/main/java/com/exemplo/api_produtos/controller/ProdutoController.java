@@ -2,55 +2,76 @@ package com.exemplo.api_produtos.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.*;
 
+import com.exemplo.api_produtos.model.Fornecedor;
 import com.exemplo.api_produtos.model.Produto;
 import com.exemplo.api_produtos.repository.ProdutoRepository;
+import com.exemplo.api_produtos.repository.CategoriaRepository;
+import com.exemplo.api_produtos.repository.FornecedorRepository;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/produtos")
+@RequiredArgsConstructor
 public class ProdutoController {
 
-    private final ProdutoRepository repository;
-
-    public ProdutoController(ProdutoRepository repository) {
-        this.repository = repository;
-    }
+    private final ProdutoRepository produtoRepository;
+    private final CategoriaRepository categoriaRepository;
+    private final FornecedorRepository fornecedorRepository;
 
     @PostMapping
-    public Produto criar(@RequestBody Produto produto) {
-        return repository.save(produto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Produto> createProduto(@RequestBody Produto produto) {
+        if (produto.getCategoria() == null || produto.getCategoria().getId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        categoriaRepository.findById(produto.getCategoria().getId()
+        .ifPresent(produto::setCategoria);
+
+        if (produto.getFornecedores() != null && !produto.getFornecedores().isEmpty()) {
+            produto.getFornecedores().clear();
+            produto.getFornecedores().forEach(fornecedor -> {
+                fornecedorRepository.findById(fornecedor.getId())
+                .ifPresent(produto.getFornecedores()::add);
+            });
+        }
+    Produto savedProduto = produtoRepository.save(produto);
+    
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedProduto);
+
     }
 
     @GetMapping
-    public List<Produto> listar() {
-        return repository.findAll();
+    public List<Produto> getAllProdutos() {
+        return produtoRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Produto buscar(@PathVariable Long id){
-        return repository.findById(id).orElse(null);
+    public ResponseEntity<Produto> getCategoriaById(@PathVariable Long id){
+        return produtoRepository.findById(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto novoProduto){
+    public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetails){
         return repository.findById(id).map(produto -> {
             produto.setNome(novoProduto.getNome());
-            produto.setPreco(novoProduto.getPreco());
-            return repository.save(produto);
-        }).orElse(null);
+            Produto updatedProduto = produtoRepository.save(produto);
+            return ResponseEntity.ok(updatedProduto);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
+        if (!produtoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        produtoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
