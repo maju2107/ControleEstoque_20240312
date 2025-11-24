@@ -1,14 +1,12 @@
 package com.exemplo.api_produtos.controller;
 
 import java.util.List;
-
 import com.exemplo.api_produtos.repository.FornecedorRepository;
 import com.exemplo.api_produtos.model.Fornecedor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.htpp.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.htpp.HttpStatus;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/fornecedores")
@@ -40,7 +38,7 @@ public class FornecedorController {
         return fornecedorRepository.findById(id)
         .map(fornecedor -> {
             fornecedor.setNome(fornecedorDetails.getNome());
-            Categoria updateCategoria = fornecedorRepository.save(fornecedor);
+            Fornecedor updatedFornecedor = fornecedorRepository.save(fornecedor);
             return ResponseEntity.ok(updatedFornecedor);
         }).orElse(ResponseEntity.notFound().build());
     }

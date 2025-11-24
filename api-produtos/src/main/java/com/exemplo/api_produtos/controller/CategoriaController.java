@@ -1,11 +1,10 @@
 package com.exemplo.api_produtos.controller;
 
 import java.util.List;
-
 import com.exemplo.api_produtos.repository.CategoriaRepository;
 import com.exemplo.api_produtos.model.Categoria;
+import org.springframework.http.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.htpp.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +39,7 @@ public class CategoriaController {
         return categoriaRepository.findById(id)
         .map(categoria -> {
             categoria.setNome(categoriaDetails.getNome());
-            Categoria updateCategoria = categoriaRepository.save(categoria);
+            Categoria updatedCategoria = categoriaRepository.save(categoria);
             return ResponseEntity.ok(updatedCategoria);
         }).orElse(ResponseEntity.notFound().build());
     }

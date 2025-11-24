@@ -1,10 +1,8 @@
 package com.exemplo.api_produtos.controller;
 
 import java.util.List;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
-
 import com.exemplo.api_produtos.model.Fornecedor;
 import com.exemplo.api_produtos.model.Produto;
 import com.exemplo.api_produtos.repository.ProdutoRepository;
