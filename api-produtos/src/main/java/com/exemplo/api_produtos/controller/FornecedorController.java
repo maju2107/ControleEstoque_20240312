@@ -7,7 +7,8 @@ import com.exemplo.api_produtos.model.Fornecedor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.htpp.*;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.htpp.HttpStatus;
 
 @RestController
 @RequestMapping("/api/fornecedores")
@@ -35,7 +36,7 @@ public class FornecedorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable Long id, @RequestBody Categoria categoriaDetails){
+    public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedorDetails){
         return fornecedorRepository.findById(id)
         .map(fornecedor -> {
             fornecedor.setNome(fornecedorDetails.getNome());
@@ -45,7 +46,7 @@ public class FornecedorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<void> deleteFornecedor(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteFornecedor(@PathVariable Long id) {
         if (!fornecedorRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

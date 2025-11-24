@@ -11,6 +11,7 @@ import com.exemplo.api_produtos.repository.ProdutoRepository;
 import com.exemplo.api_produtos.repository.CategoriaRepository;
 import com.exemplo.api_produtos.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/produtos")
@@ -28,7 +29,7 @@ public class ProdutoController {
             return ResponseEntity.badRequest().build();
         }
 
-        categoriaRepository.findById(produto.getCategoria().getId()
+        categoriaRepository.findById(produto.getCategoria().getId())
         .ifPresent(produto::setCategoria);
 
         if (produto.getFornecedores() != null && !produto.getFornecedores().isEmpty()) {
@@ -58,8 +59,8 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> updateProduto(@PathVariable Long id, @RequestBody Produto produtoDetails){
-        return repository.findById(id).map(produto -> {
-            produto.setNome(novoProduto.getNome());
+        return produtoRepository.findById(id).map(produto -> {
+            produto.setNome(produtoDetails.getNome());
             Produto updatedProduto = produtoRepository.save(produto);
             return ResponseEntity.ok(updatedProduto);
         }).orElse(ResponseEntity.notFound().build());
