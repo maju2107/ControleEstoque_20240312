@@ -12,38 +12,46 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/categorias")
-@RequiredAgsConstructor
+@RequiredArgsConstructor
 public class CategoriaController {
 
-    private final CategoriaRepository categoriarepository;
+    private final CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public Produto criar(@RequestBody Produto produto) {
-        return repository.save(produto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Categoria creatCategoria(@RequestBody Categoria categoria) {
+        return categoriaRepository.save(categoria);
     }
 
     @GetMapping
     public List<Categoria> getAllCategoria() {
-        return categoriarepository.findAll();
+        return categoriaRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Produto buscar(@PathVariable Long id){
-        return repository.findById(id).orElse(null);
+    public ResponseEntity<Categoria> getCategoriaById(@PathVariable Long id){
+        return categoriaRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto novoProduto){
-        return repository.findById(id).map(produto -> {
-            produto.setNome(novoProduto.getNome());
-            produto.setPreco(novoProduto.getPreco());
-            return repository.save(produto);
-        }).orElse(null);
+    public ResponseEntity<Categoria> updateCategoria(@PathVariable Long id, @RequestBody Categoria categoriaDetails){
+        return categoriaRepository.findById(id)
+        .map(categoria -> {
+            categoria.setNome(categoriaDetails.getNome());
+            Categoria updateCategoria = categoriaRepository.save(categoria);
+            returnResponseEntity.ok(upadateCategoria);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<void> deleteCategoria(@PathVariable Long id) {
+        if (!categoriaRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        categoriaRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
