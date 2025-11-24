@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.exemplo.api_produtos.repository.CategoriaRepository;
 import com.exemplo.api_produtos.model.Categoria;
-import lombok.RequiredArgsConstructot;
+import lombok.RequiredArgsConstructor;
 import org.springframework.htpp.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class CategoriaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Categoria creatCategoria(@RequestBody Categoria categoria) {
+    public Categoria createCategoria(@RequestBody Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
@@ -41,7 +41,7 @@ public class CategoriaController {
         .map(categoria -> {
             categoria.setNome(categoriaDetails.getNome());
             Categoria updateCategoria = categoriaRepository.save(categoria);
-            returnResponseEntity.ok(upadateCategoria);
+            return ResponseEntity.ok(updatedCategoria);
         }).orElse(ResponseEntity.notFound().build());
     }
 
