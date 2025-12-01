@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/fornecedores")
+@RequestMapping("/fornecedores")
 @RequiredArgsConstructor
 public class FornecedorController {
 

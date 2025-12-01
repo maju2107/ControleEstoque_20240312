@@ -6,7 +6,5 @@ import com.exemplo.api_produtos.model.Categoria;
 import org.springframework.stereotype.Repository;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    List<Categoria> findByNome(String nome);
-    List<Categoria> findByNomeContaining(String parteDoNome);
-    public Long findById();
+
 }

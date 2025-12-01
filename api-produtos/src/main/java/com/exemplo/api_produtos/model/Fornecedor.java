@@ -10,8 +10,9 @@ public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private String nome;
     private Long id;
+
+    private String nome;
 
     @ManyToMany(mappedBy = "fornecedores")
     private Set<Produto> produtos;

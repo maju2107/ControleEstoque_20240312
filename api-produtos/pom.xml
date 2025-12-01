@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.exemplo</groupId>
-	<artifactId>api-produtos </artifactId>
+	<artifactId>api-produtos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api-produtos </name>
+	<name>api-produtos</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -42,6 +42,7 @@
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
+			<version>9.0.0</version> 
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
