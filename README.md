@@ -1,5 +1,5 @@
-# APIprodutosJava
-Uma API em JAVA para um sistema de controle de produtos
+# Controle de Estoque
+Uma API em JAVA para um sistema de controle de estoque de produtos
 
 # Dependências e tecnologias utilizadas:
 - Spring Web 
