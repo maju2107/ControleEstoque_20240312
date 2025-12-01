@@ -1,19 +1,19 @@
 # APIprodutosJava
 Uma API em JAVA para um sistema de controle de produtos
 
-#Dependências e tecnologias utilizadas:
-o Spring Web 
-o Spring Data JPA 
-o MySQL Driver 
-o Lombok
-o Java ( 17 ou superior)
-o VSCode
+# Dependências e tecnologias utilizadas:
+- Spring Web 
+- Spring Data JPA 
+- MySQL Driver 
+- Lombok
+- Java ( 17 ou superior)
+- VSCode
 
-#Como inicializar
-No seu VSCode clicar no botão RUN JAVA
+# Como inicializar
+- No seu VSCode clicar no botão RUN JAVA
 
-#Porta da API
-http://localhost:8080
+# Porta da API
+- http://localhost:8080
 
 
 
