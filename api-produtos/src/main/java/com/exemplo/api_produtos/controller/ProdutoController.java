@@ -37,6 +37,11 @@ public class ProdutoController {
                 .ifPresent(produto.getFornecedores()::add);
             });
         }
+
+        if (produto.getEstoque() != null) {
+            produto.getEstoque().setProduto(produto);
+        }
+        
          if (produto.getEstoque() != null) {
             produto.getEstoque().setProduto(produto);
         }
