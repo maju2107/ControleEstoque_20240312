@@ -42,10 +42,6 @@ public class ProdutoController {
             produto.getEstoque().setProduto(produto);
         }
         
-         if (produto.getEstoque() != null) {
-            produto.getEstoque().setProduto(produto);
-        }
-        
     Produto savedProduto = produtoRepository.save(produto);
     
     return ResponseEntity.status(HttpStatus.CREATED).body(savedProduto);
