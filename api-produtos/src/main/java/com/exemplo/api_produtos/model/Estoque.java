@@ -12,7 +12,7 @@ public class Estoque {
     private Long id;
     private Integer quantidade;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
