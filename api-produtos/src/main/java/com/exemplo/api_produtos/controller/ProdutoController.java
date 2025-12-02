@@ -5,15 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
 import com.exemplo.api_produtos.model.Fornecedor;
 import com.exemplo.api_produtos.model.Produto;
-import com.exemplo.api_produtos.model.Estoque;
 import com.exemplo.api_produtos.repository.ProdutoRepository;
-import com.exemplo.api_produtos.repository.EstoqueRepository;
 import com.exemplo.api_produtos.repository.CategoriaRepository;
-import com.exemplo.api_produtos.repository.EstoqueRepository;
 import com.exemplo.api_produtos.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.ResponseEntity.BodyBuilder;
 
 @RestController // anotação para classes que lidam com reqs HTTP
 @RequestMapping("/produtos")
@@ -23,7 +19,6 @@ public class ProdutoController {
     private final ProdutoRepository produtoRepository;
     private final CategoriaRepository categoriaRepository;
     private final FornecedorRepository fornecedorRepository;
-    private final EstoqueRepository estoqueRepository;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
