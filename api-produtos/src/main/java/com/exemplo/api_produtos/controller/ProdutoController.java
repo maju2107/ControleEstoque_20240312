@@ -11,7 +11,7 @@ import com.exemplo.api_produtos.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
-@RestController
+@RestController // anotação para classes que lidam com reqs HTTP
 @RequestMapping("/produtos")
 @RequiredArgsConstructor
 public class ProdutoController {
@@ -54,7 +54,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> getCategoriaById(@PathVariable Long id){
+    public ResponseEntity<Produto> getProdutoById(@PathVariable Long id){
         return produtoRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());

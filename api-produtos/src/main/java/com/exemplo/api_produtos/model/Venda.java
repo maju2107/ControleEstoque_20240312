@@ -25,6 +25,6 @@ public class Venda {
     public void setValorTotal(BigDecimal valorTotal) {this.valorTotal = valorTotal;}
     public Cliente getCliente() {return cliente;}
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
-    public List<ItemVenda> getItens() {return itens;}
+    public List<ItemVenda> getItemVenda() {return itens;}
     public void setItemVenda (List<ItemVenda> itens) {this.itens = itens;} 
 }
