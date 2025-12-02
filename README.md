@@ -15,7 +15,8 @@ Uma API em JAVA para um sistema de controle de estoque de produtos
 # Porta da API
 - http://localhost:8080
 
-# Vídeo: 
+# Vídeo (não oficial): 
+- https://youtu.be/ypM1Ga3MxlA
 
 
 
