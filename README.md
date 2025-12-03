@@ -18,6 +18,8 @@ Uma API em JAVA para um sistema de controle de estoque de produtos
 # Vídeo (não oficial): 
 - https://youtu.be/ypM1Ga3MxlA
 
+# Vídeo (oficial):
+- https://youtu.be/OFuuABnxavA
 
 
 
